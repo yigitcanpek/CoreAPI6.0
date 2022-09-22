@@ -3,7 +3,7 @@ namespace NLayer.Core.Repositories
 {
     public interface IGenericRepository<T> where T : class
     {
-        IQueryable<T> GetAll(Expression<Func<T,bool>> exp);
+        IQueryable<T> GetAll();
         Task<T> GetByIdAsync(int id);
         IQueryable<T> Where(Expression<Func<T, bool>> exp);
         Task AddAsync(T entity);
