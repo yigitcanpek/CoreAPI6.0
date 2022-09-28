@@ -13,6 +13,7 @@ namespace NLayer.Repository.Repositories
     {
         protected readonly AppDbContext _context;
         private readonly DbSet<T> _dbSet;
+
         public GenericRepository(AppDbContext context)
         {
             _context = context;
@@ -21,7 +22,10 @@ namespace NLayer.Repository.Repositories
 
         public async Task AddAsync(T entity)
         {
+
             await _dbSet.AddAsync(entity);
+
+
         }
 
         public async Task AddRangeAsync(IEnumerable<T> entities)
@@ -29,19 +33,9 @@ namespace NLayer.Repository.Repositories
             await _dbSet.AddRangeAsync(entities);
         }
 
-        public async Task<bool> AnyAsync(Expression<Func<T, bool>> exp)
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
         {
-            return await _dbSet.AnyAsync(exp);
-        }
-
-        public void Delete(T entity)
-        {
-            _dbSet.Remove(entity);
-        }
-
-        public void DeleteRange(IEnumerable<T> entities)
-        {
-            _dbSet.RemoveRange(entities);
+            return await _dbSet.AnyAsync(expression);
         }
 
         public IQueryable<T> GetAll()
@@ -54,14 +48,25 @@ namespace NLayer.Repository.Repositories
             return await _dbSet.FindAsync(id);
         }
 
+        public void Remove(T entity)
+        {
+
+            _dbSet.Remove(entity);
+        }
+
+        public void RemoveRange(IEnumerable<T> entities)
+        {
+            _dbSet.RemoveRange(entities);
+        }
+
         public void Update(T entity)
         {
             _dbSet.Update(entity);
         }
 
-        public IQueryable<T> Where(Expression<Func<T, bool>> exp)
+        public IQueryable<T> Where(Expression<Func<T, bool>> expression)
         {
-            return _dbSet.Where(exp);
+            return _dbSet.Where(expression);
         }
     }
 }

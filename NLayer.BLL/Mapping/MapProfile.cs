@@ -17,6 +17,8 @@ namespace NLayer.BLL.Mapping
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<ProductFeature,ProductFeatureDto>().ReverseMap();
             CreateMap<ProductUpdateDto, Product>();
+            CreateMap<Product, ProductWithCategoryDTO>();
+            CreateMap<Category, CategoryWithProductsDto>();
         }
     }
 }

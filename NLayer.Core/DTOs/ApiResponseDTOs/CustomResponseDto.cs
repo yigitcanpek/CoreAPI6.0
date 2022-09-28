@@ -16,7 +16,7 @@ namespace NLayer.Core.DTOs.ApiResponseDTOs
 
         public static CustomResponseDto<T> Success(int statusCode, T data)
         {
-            return new CustomResponseDto<T> { Data = data, StatusCode = statusCode, Errors = null };
+            return new CustomResponseDto<T> { Data = data, StatusCode = statusCode};
         }
 
         public static CustomResponseDto<T> Success(int statusCode)
