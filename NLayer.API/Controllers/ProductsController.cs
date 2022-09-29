@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NLayer.API.Filters;
 using NLayer.BLL.Service;
 using NLayer.Core.DTOs.ApiDTOs;
 using NLayer.Core.DTOs.ApiResponseDTOs;
@@ -36,7 +37,8 @@ namespace NLayer.API.Controllers
             //return Ok( CustomResponseDto<List<ProductDto>>.Success(200, productsDtos));
             return CreateActionResult(CustomResponseDto<List<ProductDto>>.Success(200, productsDtos));
         }
-
+        //Service Filters cannot be trigger controller but 
+        [ServiceFilter(typeof(NotFoundFilter<Product>))]
         [HttpGet("{id}")]
         public  async Task<IActionResult> GetById(int id)
         {
@@ -44,7 +46,7 @@ namespace NLayer.API.Controllers
             var productsDtos = _mapper.Map<ProductDto>(products);
             return CreateActionResult(CustomResponseDto<ProductDto>.Success(200, productsDtos));
         }
-
+        
         [HttpPost]
         public async Task<IActionResult> Create(ProductDto productDto)
         {

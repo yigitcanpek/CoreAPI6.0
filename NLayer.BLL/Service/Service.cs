@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NLayer.BLL.Exceptions;
 using NLayer.Core.Repositories;
 using NLayer.Core.Service;
 using NLayer.Core.UnitOfWorks;
@@ -49,7 +50,12 @@ namespace NLayer.BLL.Service
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await _repository.GetByIdAsync(id);
+            T hasproduct = await _repository.GetByIdAsync(id);
+            if (hasproduct==null)
+            {
+                throw new NotFoundException($"{typeof(T).Name}({id}) not found");
+            }
+            return hasproduct;
         }
 
         public async Task RemoveAsync(T entity)
