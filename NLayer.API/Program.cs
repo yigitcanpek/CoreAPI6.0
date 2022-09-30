@@ -38,6 +38,9 @@ builder.Services.AddAutoMapper(typeof(MapProfile));
 //Filters
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
 
+//Caching
+builder.Services.AddMemoryCache();
+
 
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
